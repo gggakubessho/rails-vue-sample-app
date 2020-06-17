@@ -15,6 +15,7 @@
         </ul>
       </div>
     </nav>
+    <p>sample</p>
     <p>{{ message }}</p>
   </div>
 </template>
