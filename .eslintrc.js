@@ -15,6 +15,8 @@ module.exports = {
     // 'ga': true,
   },
   'rules': {
+    //末尾のセミコロンを許可しない
+    'semi': ['error', 'never'],
     // 開発環境ではdebuggerを許容する
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-alert': 0,

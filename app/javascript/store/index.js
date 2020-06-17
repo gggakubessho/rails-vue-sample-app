@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import actions from './actions';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import actions from './actions'
 // import getters from './getters'
-import mutations from './mutations';
+import mutations from './mutations'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const state = {
   auth: {
@@ -14,7 +14,7 @@ const state = {
   board: {
     lists: [],
   },
-};
+}
 
 export default new Vuex.Store({
   state,
@@ -22,4 +22,4 @@ export default new Vuex.Store({
   actions,
   mutations,
   strict: process.env.NODE_ENV !== 'production',
-});
+})
