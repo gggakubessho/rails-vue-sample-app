@@ -13,18 +13,36 @@ export default {
   components: {
     KbnBoardNavigation,
   },
-  data() {
+  data () {
     return {
-      message: 'KbnBoardView!',
+      progress: false,
+      message: ''
     }
   },
   computed: {
 
   },
   methods: {
-    handleLogout() {
-
+    setProgress (message) {
+      this.progress = true
+      this.message = message
     },
+    resetProgress () {
+      this.progress = false
+      this.message = ''
+    },
+    handleLogout () {
+      this.setProgress('ログオフ中...')
+
+      return this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push({ path: '/login' })
+        })
+        .catch(err => Promise.reject(err))
+        .then(() => {
+          this.resetProgress()
+        })
+    }
   },
 
 }

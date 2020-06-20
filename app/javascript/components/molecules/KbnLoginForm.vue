@@ -45,6 +45,18 @@
                 >
                   ログイン
                 </KbnButton>
+                <p
+                  v-if="progress"
+                  class="login-progress"
+                >
+                  ログイン中...
+                </p>
+                <p
+                  v-if="error"
+                  class="login-error"
+                >
+                  {{ error }}
+                </p>
               </div>
             </center>
           </form>
@@ -78,15 +90,28 @@ export default {
   },
   computed: {
     disableLoginAction() {
-
+      return this.progress
     },
   },
   methods: {
     resetError() {
-
+      this.error = ''
     },
     handleClick(ev) {
       // 子コンポーネントから受け取ったev
+      if(this.disableLoginAction) { return }
+      this.progress = true
+      this.error = 'error'
+
+      this.$nextTick(() => {
+        this.onlogin({ user: { email: this.email, password: this.password }})
+          .catch(err => {
+            this.error = err.message
+          })
+          .then(() => {
+            this.progress = false
+          })
+      })
     },
   },
 

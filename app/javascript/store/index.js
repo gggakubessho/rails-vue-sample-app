@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const state = {
   auth: {
-    token: null,
+    token: localStorage.getItem('token'),
     userId: null,
   },
   board: {

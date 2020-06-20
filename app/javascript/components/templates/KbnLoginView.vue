@@ -13,10 +13,14 @@ export default {
     KbnLoginForm,
   },
   methods: {
-    handleLogin() {
-
+    handleLogin(authInfo) {
+      return this.$store.dispatch('login',authInfo)
+        .then(() => {
+          this.$router.push({ path: '/' })
+        })
+        .catch(err => this.throwReject(err))
     },
-    throwReject() {},
+    throwReject(err) { return Promise.reject(err) },
   },
 }
 </script>
