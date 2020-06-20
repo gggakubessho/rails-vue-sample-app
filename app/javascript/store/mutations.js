@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 
 export default {
-  [types.AUTH_LOGIN] (state, payload) {
+  [types.AUTH_LOGIN](state, payload) {
     state.auth = payload
   },
   [types.FETCH_ALL_TASKLIST](state, payload) {
@@ -16,7 +16,7 @@ export default {
   [types.REMOVE_TASK](state, payload) {
     throw new Error('REMOVE_TASK mutation should be implemented')
   },
-  [types.AUTH_LOGOUT] (state, payload) {
+  [types.AUTH_LOGOUT](state, payload) {
     state.auth = payload
   },
 }

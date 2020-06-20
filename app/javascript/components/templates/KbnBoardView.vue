@@ -13,36 +13,36 @@ export default {
   components: {
     KbnBoardNavigation,
   },
-  data () {
+  data() {
     return {
       progress: false,
-      message: ''
+      message: '',
     }
   },
   computed: {
 
   },
   methods: {
-    setProgress (message) {
+    setProgress(message) {
       this.progress = true
       this.message = message
     },
-    resetProgress () {
+    resetProgress() {
       this.progress = false
       this.message = ''
     },
-    handleLogout () {
+    handleLogout() {
       this.setProgress('ログオフ中...')
 
       return this.$store.dispatch('logout')
         .then(() => {
           this.$router.push({ path: '/login' })
         })
-        .catch(err => Promise.reject(err))
+        .catch((err) => Promise.reject(err))
         .then(() => {
           this.resetProgress()
         })
-    }
+    },
   },
 
 }

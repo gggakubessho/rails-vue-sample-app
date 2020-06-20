@@ -2,14 +2,12 @@ import * as types from './mutation-types'
 import { Auth, List, Task } from '../api'
 
 export default {
-  login: ({ commit }, authInfo) => {
-    return Auth.login(authInfo)
-      .then(({ token, userId  }) => {
-        localStorage.setItem('token', token)
-        commit(types.AUTH_LOGIN, { token, userId  })
-      })
-      .catch(err => { throw err })
-  },
+  login: ({ commit }, authInfo) => Auth.login(authInfo)
+    .then(({ token, userId }) => {
+      localStorage.setItem('token', token)
+      commit(types.AUTH_LOGIN, { token, userId })
+    })
+    .catch((err) => { throw err }),
 
   fetchLists: ({ commit }) => {
     throw new Error('fetchLists action sould be implemented')
@@ -27,12 +25,10 @@ export default {
     throw new Error('removeTask action sould be implemented')
   },
 
-  logout: ({ commit, state }) => {
-    return Auth.logout(state.auth.token)
-      .then(() => {
-        localStorage.removeItem('token')
-        commit(types.AUTH_LOGOUT, { token: null, userId: null })
-      })
-      .catch(err => { throw err })
-  }
+  logout: ({ commit, state }) => Auth.logout(state.auth.token)
+    .then(() => {
+      localStorage.removeItem('token')
+      commit(types.AUTH_LOGOUT, { token: null, userId: null })
+    })
+    .catch((err) => { throw err }),
 }

@@ -97,15 +97,15 @@ export default {
     resetError() {
       this.error = ''
     },
-    handleClick(ev) {
+    handleClick() {
       // 子コンポーネントから受け取ったev
-      if(this.disableLoginAction) { return }
+      if (this.disableLoginAction) { return }
       this.progress = true
       this.error = 'error'
 
       this.$nextTick(() => {
-        this.onlogin({ user: { email: this.email, password: this.password }})
-          .catch(err => {
+        this.onlogin({ user: { email: this.email, password: this.password } })
+          .catch((err) => {
             this.error = err.message
           })
           .then(() => {
