@@ -23,6 +23,16 @@ module.exports = {
     'prefer-destructuring': 0,
     //importの相対パスを許可
     'import/no-unresolved': 0,
+    'import/prefer-default-export': 0,
+    'no-param-reassign': [
+      'error',
+      {
+        'props': true,
+        'ignorePropertyModificationsFor': [
+          'state'
+        ]
+      }
+    ],
   },
   'parserOptions': {
     'sourceType': 'module'
