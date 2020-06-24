@@ -9,33 +9,57 @@
           class="z-depth-1 grey lighten-4 row"
           style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;"
         >
+          <div
+            v-if="error"
+            class="alert card red lighten-4 red-text text-darken-4"
+          >
+            <div class="card-content">
+              <p><i class="material-icons">check_circle</i><span>{{ error }}</span></p>
+            </div>
+          </div>
           <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <input
-                  id="email"
-                  v-model="email"
-                  type="email"
-                  autocomplete="off"
-                  class="validate"
-                  @focus="resetError"
-                >
-                <label for="email">Enter your email</label>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|email"
+            >
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="email"
+                    v-model="email"
+                    type="email"
+                    autocomplete="off"
+                    class="validate"
+                    @focus="resetError"
+                  >
+                  <label for="email">Enter your email</label>
+                  <p style="color:red;">
+                    {{ errors[0] }}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input
-                  id="pwassword"
-                  v-model="password"
-                  type="password"
-                  autocomplete="off"
-                  class="validate"
-                  @focus="resetError"
-                >
-                <label for="password">Enter your password</label>
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="pwassword"
+                    v-model="password"
+                    type="password"
+                    autocomplete="off"
+                    class="validate"
+                    @focus="resetError"
+                  >
+                  <label for="password">Enter your password</label>
+                  <p style="color:red;">
+                    {{ errors[0] }}
+                  </p>
+                </div>
               </div>
-            </div>
+            </ValidationProvider>
             <br>
             <center>
               <div class="row">
@@ -45,18 +69,6 @@
                 >
                   ログイン
                 </KbnButton>
-                <p
-                  v-if="progress"
-                  class="login-progress"
-                >
-                  ログイン中...
-                </p>
-                <p
-                  v-if="error"
-                  class="login-error"
-                >
-                  {{ error }}
-                </p>
               </div>
             </center>
           </form>
@@ -101,7 +113,6 @@ export default {
       // 子コンポーネントから受け取ったev
       if (this.disableLoginAction) { return }
       this.progress = true
-      this.error = 'error'
 
       this.$nextTick(() => {
         this.onlogin({ user: { email: this.email, password: this.password } })
@@ -118,5 +129,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.alert {
+  .card-content {
+    padding: 12px;
+    span {
+      margin-right:4px;
+    }
+    .material-icons {
+      position: relative;
+      top: 5px;
+      margin-right: 0.5em;
+    }
+  }
+}
+
 </style>
