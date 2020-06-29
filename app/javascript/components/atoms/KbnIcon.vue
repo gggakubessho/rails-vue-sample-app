@@ -23,11 +23,13 @@ export default {
 
     icon() {
       const name = this.name
+      let icon = ''
       if (name === 'close' || name === 'remove') {
-        return 'x'
+        icon = 'x'
       } if (name === 'add') {
-        return '+'
+        icon = '+'
       }
+      return icon
     },
   },
 }
