@@ -9,9 +9,11 @@ export default {
     })
     .catch((err) => { throw err }),
 
-  fetchLists: ({ commit }) => {
-    throw new Error('fetchLists action sould be implemented')
-  },
+  fetchLists: ({ commit, state }) => List.fetch(state.auth.token)
+    .then(({ lists }) => {
+      commit(types.FETCH_ALL_TASKLIST, lists)
+    })
+    .catch((err) => { throw err }),
 
   addTasks: ({ commit }) => {
     throw new Error('addTask action sould be implemented')
