@@ -19,31 +19,32 @@
 <script>
 import KbnButton from '../atoms/KbnButton.vue'
 import KbnIcon from '../atoms/KbnIcon.vue'
+
 export default {
   name: 'KbnTaskCard',
 
   components: {
     KbnButton,
-    KbnIcon
+    KbnIcon,
   },
   props: {
     id: {
       type: Number,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     description: {
       type: String,
-      default: ''
+      default: '',
     },
     tasklist_id: {
       type: Number,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 <style scoped>

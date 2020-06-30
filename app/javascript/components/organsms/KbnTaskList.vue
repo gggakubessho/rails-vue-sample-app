@@ -26,10 +26,10 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import KbnTaskListHeader from '../molecules/KbnTaskListHeader.vue'
 import KbnTaskCard from '../molecules/KbnTaskCard.vue'
 import KbnTaskForm from '../molecules/KbnTaskForm'
-import draggable from 'vuedraggable'
 
 export default {
   name: 'KbnTaskList',
@@ -38,7 +38,7 @@ export default {
     KbnTaskListHeader,
     KbnTaskCard,
     KbnTaskForm,
-    draggable
+    draggable,
   },
 
   props: {
