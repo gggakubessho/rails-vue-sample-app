@@ -1,6 +1,5 @@
 <template>
   <ul class="board-tasks">
-    KbnBoardTask
     <li
       v-for="list in lists"
       :key="list.id"

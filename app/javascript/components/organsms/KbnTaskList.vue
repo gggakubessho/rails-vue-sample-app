@@ -1,6 +1,27 @@
 <template>
   <div class="task-list">
-    KbnTaskList
+    <KbnTaskListHeader
+      :name="name"
+      @add="shown = true"
+    />
+    <ul class="task-list-items">
+      <draggable
+        v-model="draggableItems"
+        :options="{ group: 'items' }"
+        @change="handleChange"
+        @end="handleEnd"
+      >
+        <li
+          v-for="item in draggableItems"
+          :key="item.id"
+        >
+          <KbnTaskCard
+            v-bind="item"
+            @remove="handleRemove"
+          />
+        </li>
+      </draggable>
+    </ul>
   </div>
 </template>
 
@@ -8,6 +29,7 @@
 import KbnTaskListHeader from '../molecules/KbnTaskListHeader.vue'
 import KbnTaskCard from '../molecules/KbnTaskCard.vue'
 import KbnTaskForm from '../molecules/KbnTaskForm'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'KbnTaskList',
@@ -16,6 +38,7 @@ export default {
     KbnTaskListHeader,
     KbnTaskCard,
     KbnTaskForm,
+    draggable
   },
 
   props: {
@@ -49,7 +72,7 @@ export default {
   },
 
   methods: {
-    handleRemove({ id, listId }) {
+    handleRemove({ id, tasklist_id }) {
 
     },
 
