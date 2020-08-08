@@ -78,7 +78,8 @@ export default {
 
   methods: {
     handleRemove({ id, tasklist_id }) {
-
+      return this.$store.dispatch('removeTask', { id, tasklist_id })
+        .catch((err) => Promise.reject(err))
     },
 
     handleChange({ added, removed }) {

@@ -18,4 +18,12 @@ export default {
         reject(new Error(err.response.data.message || err.message))
       })
   }),
+
+  remove: (token, { id, tasklist_id }) => new Promise((resolve, reject) => {
+    client.delete(`/api/kbnboards/${id}`, { headers: { Authorization: token } })
+      .then(() => resolve())
+      .catch((err) => {
+        reject(new Error(err.response.data.message || err.message))
+      })
+  }),
 }

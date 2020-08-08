@@ -27,9 +27,11 @@ export default {
     })
     .catch((err) => { throw err }),
 
-  removeTask: ({ commit }) => {
-    throw new Error('removeTask action sould be implemented')
-  },
+  removeTask: ({ commit, state }, { id, tasklist_id }) => Task.remove(state.auth.token, { id, tasklist_id })
+    .then(() => {
+      commit(types.REMOVE_TASK, { id, tasklist_id })
+    })
+    .catch((err) => { throw err }),
 
   logout: ({ commit, state }) => Auth.logout(state.auth.token)
     .then(() => {
