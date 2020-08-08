@@ -1,6 +1,6 @@
 <template>
   <button
-    class="col s12 btn btn-large waves-effect "
+    class=""
     :class="classes"
     :disabled="disabled"
     type="button"
@@ -26,8 +26,8 @@ export default {
   },
   computed: {
     classes() {
-      const cls = this.type === 'txt' ? (`-${this.type}`) : ''
-      return [`kbn-button${cls}`]
+      const cls = this.type === 'text' ? 'kbn-button-text' : 'col s12 btn btn-small waves-effect'
+      return cls
     },
   },
   methods: {
@@ -39,12 +39,15 @@ export default {
 </script>
 
 <style scoped>
-.kbn-button {
-  padding: .6em 1.3em;
-}
 .kbn-button-text {
   border: none;
   padding-right: 0;
   padding-left: 0;
+  background-color: transparent;
+  color: #333333;
+}
+.btn-small{
+  margin: 0 2px;
+  padding: 0 10px;
 }
 </style>

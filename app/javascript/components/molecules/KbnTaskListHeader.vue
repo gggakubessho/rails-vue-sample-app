@@ -37,6 +37,7 @@ export default {
 
 <style scoped>
 .task-list-header {
+  padding: 4px;
   display: flex;
   border-bottom: thin solid black;
 }

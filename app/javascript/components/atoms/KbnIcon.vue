@@ -1,7 +1,5 @@
 <template>
-  <span :class="classes">
-    {{ icon }}
-  </span>
+  <i class="material-icons">{{ icon }}</i>
 </template>
 
 <script>
@@ -24,10 +22,12 @@ export default {
     icon() {
       const name = this.name
       let icon = ''
-      if (name === 'close' || name === 'remove') {
-        icon = 'x'
+      if (name === 'close') {
+        icon = 'close'
+      } if (name === 'remove') {
+        icon = 'delete'
       } if (name === 'add') {
-        icon = '+'
+        icon = 'add'
       }
       return icon
     },

@@ -14,7 +14,6 @@
         >
           <li>
             <KbnButton
-              type="text"
               @click="$emit('logout')"
             >
               ログアウト
