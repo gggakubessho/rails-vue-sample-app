@@ -33,6 +33,25 @@ export default {
     })
     .catch((err) => { throw err }),
 
+  moveTaskFrom: ({ commit, state }, { id, tasklist_id }) => {
+    commit(types.MOVE_TASK_FROM, { target: id, from: tasklist_id })
+    return Promise.resolve()
+  },
+
+  moveToTask: ({ commit, state }, { id, tasklist_id }) => {
+    commit(types.MOVE_TO_TASK, { target: id, to: tasklist_id })
+    return Promise.resolve()
+  },
+
+  performTaskMoving: ({ commit, state }) => {
+    const { target, from, to } = state.dragging
+    return Task.move(state.auth.token, { id: target, from, to })
+      .then(() => {
+        commit(types.MOVE_TASK_DONE, { target, from, to })
+      })
+      .catch((err) => { throw err })
+  },
+
   logout: ({ commit, state }) => Auth.logout(state.auth.token)
     .then(() => {
       localStorage.removeItem('token')

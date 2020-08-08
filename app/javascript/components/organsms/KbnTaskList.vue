@@ -32,6 +32,7 @@
 
 <script>
 import draggable from 'vuedraggable'
+import { mapState } from 'vuex'
 import KbnTaskListHeader from '../molecules/KbnTaskListHeader.vue'
 import KbnTaskCard from '../molecules/KbnTaskCard.vue'
 import KbnTaskForm from '../molecules/KbnTaskForm'
@@ -74,6 +75,11 @@ export default {
 
       },
     },
+    ...mapState({
+      canMove: (state) => state.dragging.target !== null
+        && state.dragging.from !== null
+        && state.dragging.to !== null,
+    }),
   },
 
   methods: {
@@ -83,11 +89,24 @@ export default {
     },
 
     handleChange({ added, removed }) {
-
+      if (added) {
+        return this.$store.dispatch('moveToTask', {
+          id: added.element.id,
+          tasklist_id: this.id,
+        }).catch((err) => Promise.reject(err))
+      } if (removed) {
+        return this.$store.dispatch('moveTaskFrom', {
+          id: removed.element.id,
+          tasklist_id: this.id,
+        }).catch((err) => Promise.reject(err))
+      }
     },
 
     handleEnd() {
-
+      if (this.canMove) {
+        return this.$store.dispatch('performTaskMoving')
+          .catch((err) => Promise.reject(err))
+      }
     },
   },
 }

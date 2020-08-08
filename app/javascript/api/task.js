@@ -26,4 +26,12 @@ export default {
         reject(new Error(err.response.data.message || err.message))
       })
   }),
+
+  move: (token, { id, from, to }) => new Promise((resolve, reject) => {
+    client.post(`/api/kbnboards/${id}/move`, { from, to }, { headers: { Authorization: token } })
+      .then(() => resolve())
+      .catch((err) => {
+        reject(new Error(err.response.data.message || err.message))
+      })
+  }),
 }
