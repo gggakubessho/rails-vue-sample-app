@@ -15,9 +15,11 @@ export default {
     })
     .catch((err) => { throw err }),
 
-  addTasks: ({ commit }) => {
-    throw new Error('addTask action sould be implemented')
-  },
+  addTask: ({ commit, state }, { tasklist_id, name }) => Task.add(state.auth.token, { tasklist_id, name })
+    .then((task) => {
+      commit(types.ADD_TASK, task)
+    })
+    .catch((err) => { throw err }),
 
   updateTask: ({ commit }) => {
     throw new Error('updateTask action sould be implemented')

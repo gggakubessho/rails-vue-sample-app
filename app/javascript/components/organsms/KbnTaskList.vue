@@ -22,6 +22,11 @@
         </li>
       </draggable>
     </ul>
+    <KbnTaskForm
+      v-if="shown"
+      :tasklist_id="id"
+      @close="shown = false"
+    />
   </div>
 </template>
 
