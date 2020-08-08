@@ -22,6 +22,15 @@ class Api::KbnboardsController < ApplicationController
     end
   end
 
+  def move
+    task = current_user.tasks.find_by(id: params[:id], tasklist_id: task_move_params[:from])
+    if task.update(tasklist_id: task_move_params[:to])
+      render json: { status: 'SUCCESS', message: 'moved the task', data: task }
+    else
+      render json: { status: 'ERROR', message: 'Failed to move the task', data: task.errors }
+    end
+  end
+
   def destroy
     task = current_user.tasks.find(params[:id]).destroy
     render json: { status: 'SUCCESS', message: 'Delete the task', data: task }
@@ -32,4 +41,9 @@ class Api::KbnboardsController < ApplicationController
   def task_params
     params.permit(:tasklist_id, :name, :description)
   end
+
+  def task_move_params
+    params.permit(:from, :to)
+  end
+
 end

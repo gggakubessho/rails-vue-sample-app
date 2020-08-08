@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   namespace :api, { format: 'json' } do
-    resources :kbnboards, only: [:index, :create, :update, :destroy]
+    resources :kbnboards, only: [:index, :create, :update, :destroy] do
+      member do
+        post 'move'
+      end
+    end
   end
 end
