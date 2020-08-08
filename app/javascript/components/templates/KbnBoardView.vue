@@ -3,6 +3,8 @@
     <KbnBoardNavigation @logout="handleLogout" />
     <p>{{ message }}</p>
     <KbnBoardTask :lists="lists" />
+    <!-- タスク詳細モーダル表示用プレースホルダ -->
+    <router-view />
   </div>
 </template>
 

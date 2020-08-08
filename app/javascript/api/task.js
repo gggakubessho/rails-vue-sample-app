@@ -8,4 +8,14 @@ export default {
         reject(new Error(err.response.data.message || err.message))
       })
   }),
+
+  update: (token, {
+    id, name, description, tasklist_id,
+  }) => new Promise((resolve, reject) => {
+    client.put(`/api/kbnboards/${id}`, { name, description, tasklist_id }, { headers: { Authorization: token } })
+      .then(() => resolve())
+      .catch((err) => {
+        reject(new Error(err.response.data.message || err.message))
+      })
+  }),
 }
