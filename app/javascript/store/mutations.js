@@ -13,8 +13,8 @@ export default {
     const task = payload
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.id === task.tasklist_id) {
-        list.items.push(task)
+      if (list.id === task.data.tasklist_id) {
+        list.items.push(task.data)
         break
       }
     }
@@ -24,12 +24,13 @@ export default {
     const task = payload
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.id !== task.listId) { continue }
+      if (list.id !== task.tasklist_id) { continue }
       for (let j = 0; j < list.items.length; j++) {
         const item = list.items[j]
         if (item.id === task.id) {
           item.name = task.name
           item.description = task.description
+          console.log(item)
           break
         }
       }
@@ -37,10 +38,10 @@ export default {
   },
 
   [types.REMOVE_TASK](state, payload) {
-    const { id, listId } = payload
+    const { id, tasklist_id } = payload
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.id !== listId) { continue }
+      if (list.id !== tasklist_id) { continue }
       list.items = list.items.filter((item) => item.id !== id)
     }
   },
